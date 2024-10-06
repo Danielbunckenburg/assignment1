@@ -4,6 +4,7 @@
 
 // Question a) 
 
+//First methode
 let studentsquiz: (int * string list) list = [
     (1, ["A"; "B"; "C"; "D"])
     (2, ["A"; "B"; "D"; "D"])
@@ -11,6 +12,16 @@ let studentsquiz: (int * string list) list = [
     (4, ["A"; "B"; "C"; "D"])
 ]
 
+(*
+Second methode
+let student1 = ["A";"B";"C";"D"]
+let student2 = ["A";"B";"D";"D"]
+let student3 = ["B";"B";"B";"A"]
+let student4 = ["A";"B";"C";"D"]
+let studentsquiz = [1;2;3;4]
+*)
+
+//Question b)
 
 let countAnswer(studentsquiz: (int * string list) list) questionIndex answer  = 
     studentsquiz
@@ -45,34 +56,15 @@ let countquestionsprocent indexqueston =
 //Question D
 
 
-
-let rec findMatchingStudents students =
-    match students with
-    | [] -> None  // Base case: no more students to check
-    | (id, answers) :: tail ->
-        // Check if any remaining student in the list has the same answers
-        match List.tryFind (fun (_, ans) -> ans = answers) tail with
-        | Some (matchingId, _) -> Some (id, matchingId)  // Found a match
-        | None -> findMatchingStudents tail  // Recursively check the rest of the list
-
-// Example usage
-let students = [
-    (1, [|1; 2; 3; 4|])
-    (2, [|2; 3; 4; 1|])
-    (3, [|1; 2; 3; 4|])
-    (4, [|4; 3; 2; 1|])
-]
-
-match findMatchingStudents students with
-| Some (id1, id2) -> printfn "Students %d and %d have the same answers." id1 id2
-| None -> printfn "No students have the same answers."
+// Function that finds the IDs of students with the same answers
+let compare = 
+    studentsquiz
+    |> List.groupBy (fun (_, answers) -> answers) // group by the second element (answers)
+    |> List.filter (fun (_, students) -> List.length students >= 2) // filter out groups with fewer than 2 students
+    |> List.map (fun (_, students) -> List.map (fun (studentID, _) -> studentID) students) // extract the student IDs
 
 
-
-
-
-
-//printfn"comparefunction %A" compare
+printfn"comparefunction %A" compare
 
 
 
