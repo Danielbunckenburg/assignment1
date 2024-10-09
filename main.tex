@@ -121,12 +121,12 @@ another way is just using a dictionary
 
     \begin{lstlisting}
 
-
-let studentsSurveys: Survey list = [
-    { StudentId = 1; Answers = ["A"; "B"; "C"; "D"] }
-    { StudentId = 2; Answers = ["B"; "B"; "B"; "C"] }
-    { StudentId = 3; Answers = ["C"; "B"; "B"; "A"] }
-    { StudentId = 4; Answers = ["D"; "B"; "B"; "D"] }
+//Second methode
+let student1 = ["A";"B";"C";"D"]
+let student2 = ["A";"B";"D";"D"]
+let student3 = ["B";"B";"B";"A"]
+let student4 = ["A";"B";"C";"D"]
+let studentsquiz = [1;2;3;4]
 
     \end{lstlisting}
 
@@ -140,18 +140,13 @@ Using kens method for function design. The function should count the number of s
 
 
  \begin{lstlisting}
-
-
 let countAnswer(studentsquiz: (int * string list) list) questionIndex answer  = 
     studentsquiz
     |> List.filter (fun (_, answers) -> answers.[questionIndex] = answer)
     |> List.length 
 
-
 let counta =  countAnswer studentsquiz 0 "A"
 let countb =  countAnswer studentsquiz 0 "B"
-let countc =  countAnswer studentsquiz 0 "C"
-let countd =  countAnswer studentsquiz 0 "D"
 
     \end{lstlisting}
 
@@ -162,22 +157,12 @@ Since the function is supposed to count the answer, I have given it the name of 
 Since the function is supposed to count the question in procent, I have given it the name of countquestionsprocent. As an input it takes the an index from 0-3. First it definds 4 let bindings where it uses the function from before, and then changes the answer from A to D. Then 4 new let binding that define the procent for each anwaser. and divided with the total amount in this case 4. And then it prints the results, and you have to do this for each question.
  \begin{lstlisting}
 
+let countquestionsprocent (ansawer:int) = 
+    float ansawer /(float studentsquiz.Length) * 100.0 
 
-let countquestionsprocent indexqueston =  
-    let counta =  countAnswer studentsquiz indexqueston "A"
-    let countb =  countAnswer studentsquiz indexqueston "B"
-    let countc =  countAnswer studentsquiz indexqueston "C"
-    let countd =  countAnswer studentsquiz indexqueston "D"
-    let (procenta:float) = float counta/4.0
-    let (procentb:float) = float countb/4.0
-    let (procentc:float) = float countc/4.0
-    let (procentd:float) = float countd/4.0
-    printfn "Answer A: %A  Answer B: %A Answer c:  %A Answer D: %A"  procenta procentb procentc procentd 
 
-//printfn "procents to question 1%A" (countquestionsprocent 0 )
-//printfn "procents to question 2%A" (countquestionsprocent 1 )
-//printfn "procents to question 3%A" (countquestionsprocent 2 )
-//printfn "procents to question 4%A" (countquestionsprocent 3 )
+printfn"How many did ansawer A in question 1: %A" (countquestionsprocent counta )
+printfn"How many did ansawer B in question 1: %A" (countquestionsprocent countb )
 
 
     \end{lstlisting}
@@ -189,37 +174,11 @@ Since the function is supposed to check if any of the students have ansawer the 
 
 
  \begin{lstlisting}
-
-let firstSurveyAnswers = studentsquiz |> List.item 0 |> snd
-let secondSurveyAnswers = studentsquiz |> List.item 1 |> snd
-let thirdSurveyAnswers = studentsquiz |> List.item 2 |> snd
-let fouthSurveyAnswers = studentsquiz |> List.item 3 |> snd
-
 let compare = 
-    let s1s2 = firstSurveyAnswers = secondSurveyAnswers
-    let s1s3 = firstSurveyAnswers = thirdSurveyAnswers
-    let s1s4 = firstSurveyAnswers = fouthSurveyAnswers
-    let s2s3 = secondSurveyAnswers = thirdSurveyAnswers
-    let s2s4 = secondSurveyAnswers = fouthSurveyAnswers
-    let s3s2 = thirdSurveyAnswers = secondSurveyAnswers
-    let s3s4 = thirdSurveyAnswers = fouthSurveyAnswers
-
-    if s1s2 = true then printfn "s1s2 have same ansawer" else printfn ""
-
-    if s1s3 = true then printfn "s1s3 have same ansawer" else printfn ""
-
-    if s1s4 = true then printfn "s1s4 have same ansawer" else printfn ""
-
-    if s2s3 = true then printfn "s2s3 have same ansawer" else printfn ""
-
-    if s2s4 = true then printfn "s2s4 have same ansawer" else printfn ""
-
-    if s3s2 = true then printfn "s3s2 have same ansawer" else printfn ""
-
-    if s3s4 = true then printfn "s3s4 have same ansawer" else printfn ""
-
-printfn"comparefunction %A" compare
-
+    studentsquiz
+    |> List.groupBy (fun (_, answers) -> answers) // group by the second element (answers)
+    |> List.filter (fun (_, students) -> List.length students >= 2) // filter out groups with fewer than 2 students
+    |> List.map (fun (_, students) -> List.map (fun (studentID, _) -> studentID) students) // extract the student IDs
 
     \end{lstlisting}
 
