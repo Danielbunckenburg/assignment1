@@ -22,7 +22,9 @@
 \section{Opgave}
 \subsection{}
 
-There are a number of ways of repercenting a 2 dementional vector i f shape. One way is to make a list, another is to make a tuple. I have chosen a tuple since it is possible to have different types, eg. int and float.
+There are multiple ways of representing a two-dimensional vector i f shape. One way is to make a list, another is to make a tuple. I have chosen a tuple since it is possible to have different types, e.g. int and float. Another method is a list, but here it is only possible to have the same type and not different. 
+
+The syntax of a tuple is a let binding that assign a tuple to x $$ let x = (2.0, 3.0)$$
 
 
 
@@ -38,25 +40,69 @@ Since names should give an indication of what the functions do.
 
 \subsection{}
 
+In the following to access each element of the vector, we will use fst for the first value, and snd for the second value.
+
 In the function "Lenghtofvector", the function takes as input a tuple with the type of floats and outputs a float. The function takes each element of the tuple and then puts it in the mathematical form for the length of a vector.
 
-In the function "Addofvector" takes as input a 2 tuple with the type of floats. It outputs one tuple that is each of the first elements of the input added together and each of the second element from the input added together.
+In the function "Addofvector" takes as input a 2 tuple with the type of floats. It outputs one tuple that is each of the first elements of the input added together and each of the second elements from the input added together.
 
-In the function "Skaleofvector" takes as input a tuple and a float. It outputs a tuple where each element has been multiplied with the float giving in the input.
+In the function "Skaleofvector" takes as input a tuple and a float. It outputs a tuple where each element has been multiplied with the float given in the input.
 
 
 \subsection{}
 
-if i define 2 vectors as follows
+I have chosen 2 examples as follows.
+
     \begin{lstlisting}
-
-let x = (2.0,3.0)
-
+Example 1
+Let x = (2.0,3.0)
 let y = (1.0,2.0)
+
+Example 2
+
+let z = (10.5,2.5)
+let v =  (5.5, 5.5)
 
     \end{lstlisting}
 
-the output will be, 3,6055 for the first function. (3.0,5.0) for the second and (4.0,6.0) for the last function.
+I defined 4 let bindings here, all floats. 
+
+The first function Lenghtofvector will take as input x and z and returns the length using the mathematical formula.
+
+$$ \sqrt{(x_1)^2 + (x_2)^2}$$
+
+in our two cases
+
+$$ \sqrt{(2.0)^2 + (3.0)^2} = 3.6$$
+
+$$ \sqrt{(10.5)^2 + (2.5)^2} = 10.8 $$
+
+The second function Addofvector will in the first example take x and y. In the second example take z and v. Using the mathimatical formula 
+
+Example 1
+
+$$((x_1 + y_1),(x_2+y_2)$$
+$$((2.0 + 1.0),(3.0+2.0)$$
+$$((3.0),(5.0)$$
+
+Example 2
+$$((z_1 + v_1),(z_2+v_2)$$
+$$((10.5+ 5.5),(2.5+5.5)$$
+$$((16.0),(8.0)$$
+
+The thith function Skaleofvector will in the first example take x and multiple it with a scale 2.0 and in the second example take z and multiple it with the same scale.
+
+Example 1
+$$((x_1 \cdot 2.0) ,(x_2 \cdot 2.0)$$
+
+$$(4.0,6.0)$$
+
+Example 2
+$$((z_1 \cdot 2.0) ,(z_2 \cdot 2.0)$$
+
+$$(21.0,5.0)$$
+
+
 
 
 \subsection{}
@@ -93,7 +139,8 @@ The function should return the two vectors added together. I have given the name
 The last funtion should return a vector multiplied with a skala. I have given the name skaleofvector, since it is a good description of what the function does. The input is a list and a skala, the output is a list where each element have been multiplied with the skala. 
 
 \subsection{}
-if i wanted it in 3 demention, i would just add another element to the tuple. like this
+
+If i wanted it in 3 dimension, i would just add another element to the tuple. like this
 $x = (2.0, 3.0, 4.0)$
 
 
@@ -116,7 +163,7 @@ let studentsSurveys = [
     \end{lstlisting}
 
 
-another way is just using a dictionary
+another way is just using lists
 
 
     \begin{lstlisting}
@@ -154,7 +201,9 @@ Since the function is supposed to count the answer, I have given it the name of 
 
 \subsection{}
 
-Since the function is supposed to count the question in procent, I have given it the name of countquestionsprocent. As an input it takes the an index from 0-3. First it definds 4 let bindings where it uses the function from before, and then changes the answer from A to D. Then 4 new let binding that define the procent for each anwaser. and divided with the total amount in this case 4. And then it prints the results, and you have to do this for each question.
+Using kens method for function design. The function should calculate the percentage of student answers for all answers to a given question. Therefore i have given it the name of countquestionsprocent, since it describes what the function should do well. As an input it takes the ansawer as an int from the previsioly funtion, changes it to a float and divides it with the length of the quiz so if there is 4 students it will return 4 and if there is 10 it will return 10. At the end it multiplies it with 100 to make the output in procent, the output is a float.
+
+
  \begin{lstlisting}
 
 let countquestionsprocent (ansawer:int) = 
@@ -164,13 +213,18 @@ let countquestionsprocent (ansawer:int) =
 printfn"How many did ansawer A in question 1: %A" (countquestionsprocent counta )
 printfn"How many did ansawer B in question 1: %A" (countquestionsprocent countb )
 
-
     \end{lstlisting}
 
 
 \subsection{}
 
-Since the function is supposed to check if any of the students have ansawer the same,  I have given it the name of compare since it explains what it does. First i make 4 let bindings each, takes the ansawers of the 4 students. After that it compares each list of ansawers with each orther and retrun true if they are equal with each orther. After that there is 7 if else statements that only write if the condition is true.
+The function should find the ids of two or more students that have the same answers. Therefore i giving the name compare, since it compares students ansawer. It takes as input the tuple, as decirbed earlyer. First, it groups the answers using the function "list.groupBy", i use the unnamed function "fun" that takes as input, any studentid and answers, and returns the answers. So it is the answers that is grouped by, whereby the funtion list.groupby returns if there is multiple that have ansawer the same. 
+
+After using this funktion then i filter out the group where the length is 2 or higher using the funktion list.filter. This means that it only returns the groups where multiple students have ansawer the same.
+
+Finally the funktion uses the funktion list.map to create a new list with only the IDs of the students. Agian it uses the unnamed funktion fun.
+
+
 
 
  \begin{lstlisting}
@@ -178,7 +232,10 @@ let compare =
     studentsquiz
     |> List.groupBy (fun (_, answers) -> answers) // group by the second element (answers)
     |> List.filter (fun (_, students) -> List.length students >= 2) // filter out groups with fewer than 2 students
-    |> List.map (fun (_, students) -> List.map (fun (studentID, _) -> studentID) students) // extract the student IDs
+    |> List.map (fun (_, students) -> List.map (fun (studentid, _) -> studentid) students) // extract the student IDs
+
+
+printfn"compare %A" compare
 
     \end{lstlisting}
 
@@ -189,13 +246,52 @@ let compare =
 \subsection{}
 
 A function have a name, can take parameters, and have a body that contains the code to be executed.
+It can take inputs witch is called arguments 
+an example of a function could be 
+
+
+an example of a funktion is a follows
+
+ \begin{lstlisting}
+let compare a  = 
+    b = a + 1
+\end{lstlisting}
+
+
+a funktion works by computing and not by action, meaning that a function calculate something, it have an input and a output. An action means an interaction with the outside, for example reading or writing to a database where data is stored.
+
+
+Funtions play a central role in problem solving 
+
+
 
 \subsection{}
 Type inference is a feature that allows the compiler to automatically deduce the types of expressions without explicit types. This makes the code more concise and readable. 
 
+
+
+
 \subsection{}
 
-Functional programming offers some advantages it makes the code more robust, maintainable, and efficient. In my experince it makes it easy to understand what the progrom does if the correct functionsnames is define.
+From my experiences with functional programming The advances with functional programming
+
+First of all, immutability is an important part of functional programming. That is, once a value is assigned to a variable, it can not be changed. For example,
+
+this makes it easier to make sure that the program functions correctly. 
+
+
+High-order functions can take other functions as parameters. This allows for creation of pipelines, and design of complex control structures. For example, you can use the List.filter and List.length. 
+
+
+It also minimizes side effects with the benefit of a function that is different from returning a value based on its input. 
+
+
+
+
+Pattern matching is an easy way to handle control flow
+
+
+
 
 
 
