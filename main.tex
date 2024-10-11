@@ -11,8 +11,6 @@
 \usepackage{upquote}
 
 
-
-
 \title{assignment1}
 \author{Daniel Andre Bunckenburg}
 \date{September 2024}
@@ -24,12 +22,11 @@
 
 There are multiple ways of representing a two-dimensional vector i f shape. One way is to make a list, another is to make a tuple. I have chosen a tuple since it is possible to have different types, e.g. int and float. Another method is a list, but here it is only possible to have the same type and not different. 
 
-The syntax of a tuple is a let binding that assign a tuple to x $$ let x = (2.0, 3.0)$$
-
+The syntax of a tuple is a let binding that assigns the tuple let $$ x = (2.0, 3.0)$$
 
 
 \subsection{}
-I am giving the funtions the following names:
+I am giving the functions the following names:
 
 \begin{itemize}
   \item Lenghtofvector
@@ -40,13 +37,13 @@ Since names should give an indication of what the functions do.
 
 \subsection{}
 
-In the following to access each element of the vector, we will use fst for the first value, and snd for the second value.
+In the following to access each element of the vector, we will use fst for the first value and snd for the second value.
 
 In the function "Lenghtofvector", the function takes as input a tuple with the type of floats and outputs a float. The function takes each element of the tuple and then puts it in the mathematical form for the length of a vector.
 
 In the function "Addofvector" takes as input a 2 tuple with the type of floats. It outputs one tuple that is each of the first elements of the input added together and each of the second elements from the input added together.
 
-In the function "Skaleofvector" takes as input a tuple and a float. It outputs a tuple where each element has been multiplied with the float given in the input.
+In the function "Skaleofvector" takes as input a tuple and a float. It outputs a tuple in which each element has been multiplied with the float given in the input.
 
 
 \subsection{}
@@ -110,38 +107,51 @@ $$(21.0,5.0)$$
 
     \begin{lstlisting}
 
-let x = (2.0,3.0)
-
-let y = (1.0,2.0)
-
-//printfn "%A" (fst x)
+// Define vectors as tuples of floats
+let x = (2.0, 3.0) // 
+let y = (1.0, 2.0) // 
 
 
-let lenghtofvector vector:float = List.length(vector)
-printfn "%d" (lenghtofvector x)
+let z = (10.5,2.5)
+let v =  (5.5, 5.5)
 
 
-let addofvector (vector1:float * float) (vector2:float * float) = 
-    (fst vector1+ fst vector2, snd vector1+ snd vector2)
-printfn "%A" (addofvector x y )
+
+// Function to calculate the length (magnitude) of a vector
+let lengthOfVector (vector: float * float) = 
+    sqrt ((fst vector * fst vector) + (snd vector * snd vector) +)
+
+// Function to add two vectors
+let addOfVector (vector1: float * float) (vector2: float * float) = 
+    (fst vector1 + fst vector2, snd vector1 + snd vector2)
+
+// Function to scale a vector by a given scalar value
+let scaleOfVector (vector: float * float) (scale: float) = 
+    (fst vector * scale, snd vector * scale)
+
+// Uncomment the following lines to test the functions
+printfn "%A" (lengthOfVector x)      
+printfn "%A" (addOfVector x y)       
+printfn "%A" (scaleOfVector x 2.0)   
 
 
-let skaleofvector (vector: float * float)  (skale:float) = 
-   (fst vector * skale, snd vector * skale)
-printfn "%A" (skaleofvector x 2.0)
+printfn "%A" (lengthOfVector z)      
+printfn "%A" (addOfVector z v)       
+printfn "%A" (scaleOfVector z 2.0)   
+
     \end{lstlisting}
 
 
-Using kens method for function design. The function should return the length of the vector. I have given the name lenghtofvector, since it is a good description of what the function does. It takes as a input a list, and returns a float. 
+Using kens method for function design. The function should return the length of the vector. I have given the name lenghtofvector, since it is a good description of what the function does. It takes as a input a list, and returns a float. I designed it first with making a let binding to the name, and then adding a parameter that should be giving to the function, called "Vector" witch i specify to be a list of float. I made it a float since i wanted it to be possible to figure out the length of any vector.
 
-The function should return the two vectors added together. I have given the name addofvector, since it is a good description of what the function does. it takes as two lists as input, and returns a list where each element have been added together. 
+The function should return the two vectors added together. I have given the name addofvector, since it is a good description of what the function does. it takes as two  tuplic as input, and returns a list where each element have been added together.As the once before making the let binding to the name, after that i added two parameter for the funtion, both tuple that have the type float * float. And then the mathematical function for adding each element of tuple. I use the function fst and snd to access the first and second element.
 
-The last funtion should return a vector multiplied with a skala. I have given the name skaleofvector, since it is a good description of what the function does. The input is a list and a skala, the output is a list where each element have been multiplied with the skala. 
+The last funtion should return a vector multiplied with a skala. I have given the name skaleofvector, since it is a good description of what the function does. The input is a list and a skala, the output is a list where each element have been multiplied with the skala. Same as before with the let binding to the name and then two parameters, this time the first one is the tuple with type float * float and the second is a float that should be multiplied. then the body of the function is made up by taking each element of the tuple and multiply it with the scale using the function fst and snd to access each element.
 
 \subsection{}
 
 If i wanted it in 3 dimension, i would just add another element to the tuple. like this
-$x = (2.0, 3.0, 4.0)$
+$x = (2.0, 3.0, 4.0)$, it will also change the type syntax to be float * float * float. In addition, we would have to change the three functions so it would take the new dimension eg with the first one. In this way it would be $$(vector[2]*vector[2])$$.
 
 
 
@@ -149,7 +159,7 @@ $x = (2.0, 3.0, 4.0)$
 \section{}
 
 \subsection{}
-One way is to make a list of tuplis, each tuplis have a studentid, and a list of ansawers.
+One way is to make a list of tuples, each tuples have a studentid, and a list of answers.
 
     \begin{lstlisting}
 
@@ -197,11 +207,11 @@ let countb =  countAnswer studentsquiz 0 "B"
 
     \end{lstlisting}
 
-Since the function is supposed to count the answer, I have given it the name of countanswer. As an input it takes the student quiz and a qustionindex from 0-3, and a specific ansawer from A..D. First part takes as input  filters only students that have ansawed the specific ansawer to the specific question. After that the list.length counts the length of this new list. witch in our case is the number of students.
+Since the function is supposed to count the answer, I have given it the name of countanswer. As an input it takes the student quiz and a qustionindex from 0-3, and a specific ansawer from A..D. First part takes as input  filters only students that have answered the specific answered to the specific question. After that the list.length counts the length of this new list. witch in our case is the number of students.
 
 \subsection{}
 
-Using kens method for function design. The function should calculate the percentage of student answers for all answers to a given question. Therefore i have given it the name of countquestionsprocent, since it describes what the function should do well. As an input it takes the ansawer as an int from the previsioly funtion, changes it to a float and divides it with the length of the quiz so if there is 4 students it will return 4 and if there is 10 it will return 10. At the end it multiplies it with 100 to make the output in procent, the output is a float.
+Using kens method for function design. The function should calculate the percentage of student answers for all answers to a given question. Therefore i have given it the name of countquestionsprocent, since it describes what the function should do well. As an input it takes the answered as an int from the previously function, changes it to a float and divides it with the length of the quiz so if there is 4 students it will return 4 and if there is 10 it will return 10. At the end it multiplies it with 100 to make the output in procent, the output is a float.
 
 
  \begin{lstlisting}
@@ -218,11 +228,11 @@ printfn"How many did ansawer B in question 1: %A" (countquestionsprocent countb 
 
 \subsection{}
 
-The function should find the ids of two or more students that have the same answers. Therefore i giving the name compare, since it compares students ansawer. It takes as input the tuple, as decirbed earlyer. First, it groups the answers using the function "list.groupBy", i use the unnamed function "fun" that takes as input, any studentid and answers, and returns the answers. So it is the answers that is grouped by, whereby the funtion list.groupby returns if there is multiple that have ansawer the same. 
+The function should find the ids of two or more students that have the same answers. Therefore i giving the name compare, since it compares students ansawer. It takes as input the tuple, as decirbed earlyer. First, it groups the answers using the function "list.groupBy", i use the unnamed function "fun" that takes as input, any studentid and answers, and returns the answers. So it is the answers that is grouped by, whereby the function list.groupby returns if there is multiple that have ansawer the same. 
 
-After using this funktion then i filter out the group where the length is 2 or higher using the funktion list.filter. This means that it only returns the groups where multiple students have ansawer the same.
+After using this function, I filter out the group where the length is 2 or higher using the function list.filter. This means that it only returns the groups where multiple students have ansawer the same.
 
-Finally the funktion uses the funktion list.map to create a new list with only the IDs of the students. Agian it uses the unnamed funktion fun.
+Finally the function uses the function list.map to create a new list with only the IDs of the students. Agian it uses the unnamed function fun.
 
 
 
@@ -245,54 +255,36 @@ printfn"compare %A" compare
 
 \subsection{}
 
-A function have a name, can take parameters, and have a body that contains the code to be executed.
-It can take inputs witch is called arguments 
-an example of a function could be 
-
-
-an example of a funktion is a follows
+Functional programming is programming using functions. A function have a name, can take parameters, and have a body that contains the code to be executed. It can take inputs witch is called arguments an example of a function could be 
+as follows
 
  \begin{lstlisting}
 let compare a  = 
     b = a + 1
 \end{lstlisting}
 
-
-a funktion works by computing and not by action, meaning that a function calculate something, it have an input and a output. An action means an interaction with the outside, for example reading or writing to a database where data is stored.
-
-
-Funtions play a central role in problem solving 
+a function works by computing and not by action, meaning that a function calculates something, it has an input and a output. An action means an interaction with the outside, for example, reading or writing to a database where data are stored.
 
 
 
 \subsection{}
 Type inference is a feature that allows the compiler to automatically deduce the types of expressions without explicit types. This makes the code more concise and readable. 
 
+An example of this is 
 
+ \begin{lstlisting}
+let add x y = x + y
+\end{lstlisting}
+
+Here i do not declare what type x and y is, but the compiler examines the expression and since the operator "+" is used it deduces that x and y must be int, since "+" is typically used on numbers.
+Type inference happens during compiler time so before the code is executed. 
 
 
 \subsection{}
 
-From my experiences with functional programming The advances with functional programming
+From my experiences with functional programming, there are multiple advantages with functional programming. First of all, immutability is an important part of functional programming. That is, once a value is assigned to a variable, it cannot be changed. This makes it easier to make sure that the program functions correctly and  in addition to this it also minimizes unwanted side effects witch means that a function returns something different from returning a value based on its input. Another advantage is the use of high-order functions that can take other functions as parameters. This allows for creation of pipelines and design of complex control structures. For example, you can use the List.filter and List.length and use them in your program. Or you are able to create your own functions and use their output as input in new. Finally with the use of pattern matching it makes it easy to handle control flow
 
-First of all, immutability is an important part of functional programming. That is, once a value is assigned to a variable, it can not be changed. For example,
-
-this makes it easier to make sure that the program functions correctly. 
-
-
-High-order functions can take other functions as parameters. This allows for creation of pipelines, and design of complex control structures. For example, you can use the List.filter and List.length. 
-
-
-It also minimizes side effects with the benefit of a function that is different from returning a value based on its input. 
-
-
-
-
-Pattern matching is an easy way to handle control flow
-
-
-
-
-
+Functions play a central role in problem solving, one important way this happens is by breaking down a complex problem to multiple less complex problems in programming this is called "modular programming".
+It also helps the user of the function to focus on what the function does rather than how it does it, this is called abstraction.Finally the creation of functions increases the re-usability.
 
 \end{document}
